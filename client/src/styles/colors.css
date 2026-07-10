@@ -1,0 +1,72 @@
+/* Atlas FC Quiz — color tokens */
+:root {
+  --green-900: #0d3d24;
+  --green-800: #124d2e;
+  --green-700: #166238;
+  --green-600: #1c7a44;
+  --green-500: #229b54;
+  --green-400: #3dbb70;
+  --green-300: #7fd89e;
+  --green-100: #e3f7ea;
+
+  --navy-900: #0a1626;
+  --navy-800: #101f36;
+  --navy-700: #172c4a;
+  --navy-600: #223c60;
+
+  --gold-600: #b8860f;
+  --gold-500: #e0a812;
+  --gold-400: #f2c230;
+  --gold-300: #f7d666;
+  --gold-100: #fdf3d6;
+
+  --red-600: #b52a30;
+  --red-500: #d93a40;
+  --red-400: #ef5a5f;
+  --red-100: #fbe3e4;
+
+  --cream-050: #faf8f2;
+  --cream-100: #f3efe3;
+  --cream-200: #e9e2cf;
+
+  --gray-900: #1b1f1c;
+  --gray-700: #454a45;
+  --gray-500: #74786f;
+  --gray-300: #b7bab0;
+  --gray-100: #dedfd8;
+
+  --white: #ffffff;
+
+  --color-bg-app: var(--cream-050);
+  --color-bg-surface: var(--white);
+  --color-bg-sunken: var(--cream-100);
+  --color-bg-inverse: var(--navy-900);
+
+  --color-brand-primary: var(--green-600);
+  --color-brand-primary-hover: var(--green-700);
+  --color-brand-primary-press: var(--green-800);
+  --color-brand-on-primary: var(--white);
+
+  --color-accent-gold: var(--gold-500);
+  --color-accent-gold-hover: var(--gold-600);
+  --color-on-accent-gold: var(--navy-900);
+
+  --color-success: var(--green-500);
+  --color-success-bg: var(--green-100);
+  --color-success-border: var(--green-400);
+
+  --color-danger: var(--red-500);
+  --color-danger-bg: var(--red-100);
+  --color-danger-border: var(--red-400);
+
+  --color-text-primary: var(--gray-900);
+  --color-text-secondary: var(--gray-700);
+  --color-text-muted: var(--gray-500);
+  --color-text-on-dark: var(--cream-050);
+  --color-text-on-brand: var(--white);
+
+  --color-border: var(--gray-100);
+  --color-border-strong: var(--gray-300);
+
+  --color-focus-ring: var(--gold-400);
+}
