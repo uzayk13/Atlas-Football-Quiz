@@ -15,7 +15,7 @@ export function HomeScreen({ onStart }) {
         justifyContent: "center",
         gap: 28,
         background: "var(--navy-900)",
-        padding: 32,
+        padding: "max(32px, env(safe-area-inset-top)) max(32px, env(safe-area-inset-right)) max(32px, env(safe-area-inset-bottom)) max(32px, env(safe-area-inset-left))",
         textAlign: "center",
       }}
     >

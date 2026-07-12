@@ -76,7 +76,7 @@ export default function App() {
 
   if (error) {
     return (
-      <div style={{ height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16, background: "var(--navy-900)", padding: 32, textAlign: "center" }}>
+      <div style={{ height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16, background: "var(--navy-900)", padding: "max(32px, env(safe-area-inset-top)) max(32px, env(safe-area-inset-right)) max(32px, env(safe-area-inset-bottom)) max(32px, env(safe-area-inset-left))", textAlign: "center" }}>
         <LanguageToggle />
         <div style={{ font: "var(--text-display-sm)", color: "var(--red-400)" }}>{t.connectionError}</div>
         <div style={{ font: "var(--text-body-sm)", color: "var(--gray-300)" }}>{error}</div>

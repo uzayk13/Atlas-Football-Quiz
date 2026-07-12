@@ -18,6 +18,15 @@ body,
   width: 100%;
 }
 
+/* Mobile browser toolbars resize the viewport; dvh tracks the visible area instead of jumping. */
+@supports (height: 100dvh) {
+  html,
+  body,
+  #root {
+    height: 100dvh;
+  }
+}
+
 body {
   background: var(--color-bg-app);
   color: var(--color-text-primary);

@@ -47,6 +47,19 @@ npm run dev
 
 Open `http://localhost:5173`. Vite proxies `/api` requests to the backend, so both servers must be running.
 
+## Mobile / tablet access
+
+The frontend dev server listens on your LAN (not just `localhost`), so you can play from a phone or iPad on the same WiFi network:
+
+1. Start both servers on your Mac as usual (`npm run dev` in `server/` and in `client/`).
+2. When the frontend starts, Vite prints a **Network** URL, e.g. `http://192.168.1.103:5173/` — use that instead of `localhost`.
+3. On the phone/tablet (same WiFi), open that URL in the browser.
+4. Optional — install it as an app icon:
+   - **iOS**: Safari → Share button → "Add to Home Screen"
+   - **Android**: Chrome → menu (⋮) → "Install app"
+
+The app is a PWA (`client/public/manifest.json` + icons), so once added to the home screen it launches full-screen without browser chrome. Since this is plain HTTP over the LAN (not HTTPS), there's no offline caching — the game needs a live connection to the API anyway, so this doesn't matter in practice.
+
 ## Commands
 
 ### Backend (`/server`)

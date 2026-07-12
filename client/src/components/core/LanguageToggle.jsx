@@ -7,8 +7,8 @@ export function LanguageToggle() {
       onClick={toggleLang}
       style={{
         position: "fixed",
-        top: 14,
-        right: 14,
+        top: "max(14px, env(safe-area-inset-top))",
+        right: "max(14px, env(safe-area-inset-right))",
         zIndex: 1000,
         display: "inline-flex",
         alignItems: "center",

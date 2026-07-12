@@ -41,7 +41,7 @@ export function FieldsScreen({ player, roundNum, total, onNext }) {
   }
 
   return (
-    <div style={{ height: "100%", width: "100%", boxSizing: "border-box", display: "flex", justifyContent: "center", background: "var(--color-bg-app)", padding: "24px 20px", overflowY: "auto" }}>
+    <div style={{ height: "100%", width: "100%", boxSizing: "border-box", display: "flex", justifyContent: "center", background: "var(--color-bg-app)", padding: "max(24px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left))", overflowY: "auto" }}>
       <div style={{ width: "100%", maxWidth: 480, display: "flex", flexDirection: "column", gap: 18 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{ font: "var(--text-label-caps)", letterSpacing: "var(--letter-spacing-caps)", color: "var(--color-text-muted)", whiteSpace: "nowrap" }}>
