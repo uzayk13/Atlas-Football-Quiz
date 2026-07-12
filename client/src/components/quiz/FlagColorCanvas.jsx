@@ -50,10 +50,11 @@ export function FlagColorCanvas({ code, regions, palette, symbols = [], submitte
               strokeWidth = 4;
             }
             const fill = fills[r.id] || "#f3efe3";
-            const props = { fill, stroke, strokeWidth, onClick: () => fillRegion(r.id), style: { cursor: submitted ? "default" : "pointer" } };
+            const props = { fill, stroke, strokeWidth, transform: r.transform, onClick: () => fillRegion(r.id), style: { cursor: submitted ? "default" : "pointer" } };
             if (r.shape === "rect") return <rect key={r.id} x={r.x} y={r.y} width={r.w} height={r.h} {...props} />;
             if (r.shape === "circle") return <circle key={r.id} cx={r.cx} cy={r.cy} r={r.r} {...props} />;
             if (r.shape === "polygon") return <polygon key={r.id} points={r.points} {...props} />;
+            if (r.shape === "path") return <path key={r.id} d={r.d} {...props} />;
             return null;
           })}
         </svg>

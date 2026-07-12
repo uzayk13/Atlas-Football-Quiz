@@ -4,8 +4,10 @@ import { ProgressBar } from "../components/core/ProgressBar";
 import { ScoreBadge } from "../components/quiz/ScoreBadge";
 import { FlagColorCanvas } from "../components/quiz/FlagColorCanvas";
 import { flagTotal } from "../data/players";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export function FlagScreen({ player, roundNum, total, onNext }) {
+  const { t } = useLanguage();
   const { flag } = player;
   const [submitted, setSubmitted] = useState(false);
   const [progress, setProgress] = useState({ score: 0, total: flagTotal(flag), canSubmit: false });
@@ -15,17 +17,17 @@ export function FlagScreen({ player, roundNum, total, onNext }) {
       <div style={{ width: "100%", maxWidth: 520, display: "flex", flexDirection: "column", gap: 18 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{ font: "var(--text-label-caps)", letterSpacing: "var(--letter-spacing-caps)", color: "var(--color-text-muted)", whiteSpace: "nowrap" }}>
-            PLAYER {roundNum}/{total} · FLAG
+            {t.flagProgress(roundNum, total)}
           </div>
           <ProgressBar value={roundNum} max={total} />
         </div>
 
         <div style={{ textAlign: "center" }}>
           <div style={{ font: "var(--text-display-sm)", color: "var(--color-text-primary)" }}>
-            Color in {player.firstName}'s flag
+            {t.colorFlag(player.firstName)}
           </div>
           <div style={{ font: "var(--text-body-sm)", color: "var(--color-text-muted)", marginTop: 4 }}>
-            Pick a color, then tap a section.{flag.symbols.length > 0 ? " Drag the emblem into place." : ""}
+            {t.flagHint}{flag.symbols.length > 0 ? t.flagHintDrag : ""}
           </div>
         </div>
 
@@ -41,11 +43,11 @@ export function FlagScreen({ player, roundNum, total, onNext }) {
         {submitted && (
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "var(--navy-900)", borderRadius: "var(--radius-lg)", padding: "14px 18px" }}>
-              <div style={{ font: "var(--text-body-md)", color: "var(--cream-050)" }}>Flag score</div>
+              <div style={{ font: "var(--text-body-md)", color: "var(--cream-050)" }}>{t.flagScore}</div>
               <ScoreBadge score={progress.score} total={progress.total} />
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 14, justifyContent: "center" }}>
-              <div style={{ font: "var(--text-label-caps)", letterSpacing: "var(--letter-spacing-caps)", color: "var(--color-text-muted)" }}>The real flag</div>
+              <div style={{ font: "var(--text-label-caps)", letterSpacing: "var(--letter-spacing-caps)", color: "var(--color-text-muted)" }}>{t.realFlag}</div>
               <img
                 src={`/flags/${player.code}.svg`}
                 alt={`${player.firstName}'s real flag`}
@@ -58,11 +60,11 @@ export function FlagScreen({ player, roundNum, total, onNext }) {
         <div>
           {!submitted ? (
             <Button size="lg" disabled={!progress.canSubmit} onClick={() => setSubmitted(true)} style={{ width: "100%" }}>
-              Check Flag
+              {t.checkFlag}
             </Button>
           ) : (
             <Button variant="gold" size="lg" onClick={() => onNext(progress.score)} style={{ width: "100%" }}>
-              {roundNum < total ? "Next Player" : "See Final Score"}
+              {roundNum < total ? t.nextPlayer : t.seeFinalScore}
             </Button>
           )}
         </div>

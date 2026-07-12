@@ -230,11 +230,14 @@ export const FLAG_GEOMETRY = {
   },
 
   // South Korea — white bg + red/blue taegeuk + black trigrams (simplified to 2 circles)
+  // South Korea — white bg + centered Taegeuk swirl (red on top, blue on bottom)
   kr: {
     regions: [
-      { id: "bg",   shape: "rect",   x: 0,   y: 0,   w: 300, h: 200, correctColor: "#FFFFFF" },
-      { id: "red",  shape: "circle", cx: 140, cy: 95,  r: 35,          correctColor: "#CD2E3A" },
-      { id: "blue", shape: "circle", cx: 160, cy: 105, r: 35,          correctColor: "#0047A0" },
+      { id: "bg",   shape: "rect",   x: 0, y: 0, w: 300, h: 200, correctColor: "#FFFFFF" },
+      { id: "red",  shape: "circle", cx: 150, cy: 100, r: 45, correctColor: "#CD2E3A" },
+      { id: "blue", shape: "path",
+        d: "M150,55 A45,45 0 0,1 150,145 A22.5,22.5 0 0,1 150,100 A22.5,22.5 0 0,0 150,55 Z",
+        correctColor: "#0047A0" },
     ],
     palette: ["#FFFFFF", "#CD2E3A", "#0047A0"],
     symbols: [],

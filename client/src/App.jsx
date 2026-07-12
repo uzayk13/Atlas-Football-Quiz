@@ -3,10 +3,13 @@ import { HomeScreen } from "./screens/HomeScreen";
 import { FieldsScreen } from "./screens/FieldsScreen";
 import { FlagScreen } from "./screens/FlagScreen";
 import { ResultsScreen } from "./screens/ResultsScreen";
+import { LanguageToggle } from "./components/core/LanguageToggle";
+import { useLanguage } from "./i18n/LanguageContext";
 import { buildPlayer, shuffle, flagTotal, FIELDS } from "./data/players";
 
 // stage: "loading" | "home" | "fields" | "flag" | "results"
 export default function App() {
+  const { t } = useLanguage();
   const [stage, setStage] = useState("loading");
   const [allPlayers, setAllPlayers] = useState([]);
   const [queue, setQueue] = useState([]);
@@ -65,7 +68,8 @@ export default function App() {
   if (stage === "loading") {
     return (
       <div style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--navy-900)" }}>
-        <div style={{ font: "var(--text-display-sm)", color: "var(--cream-050)" }}>Loading players…</div>
+        <LanguageToggle />
+        <div style={{ font: "var(--text-display-sm)", color: "var(--cream-050)" }}>{t.loading}</div>
       </div>
     );
   }
@@ -73,15 +77,21 @@ export default function App() {
   if (error) {
     return (
       <div style={{ height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16, background: "var(--navy-900)", padding: 32, textAlign: "center" }}>
-        <div style={{ font: "var(--text-display-sm)", color: "var(--red-400)" }}>Could not connect to server</div>
+        <LanguageToggle />
+        <div style={{ font: "var(--text-display-sm)", color: "var(--red-400)" }}>{t.connectionError}</div>
         <div style={{ font: "var(--text-body-sm)", color: "var(--gray-300)" }}>{error}</div>
-        <div style={{ font: "var(--text-body-sm)", color: "var(--gray-500)" }}>Make sure the server is running on port 3001.</div>
+        <div style={{ font: "var(--text-body-sm)", color: "var(--gray-500)" }}>{t.connectionHint}</div>
       </div>
     );
   }
 
-  if (stage === "home") return <HomeScreen onStart={startGame} />;
-  if (stage === "fields") return <FieldsScreen key={`fields-${queueIndex}`} player={player} roundNum={queueIndex + 1} total={total} onNext={handleFieldsDone} />;
-  if (stage === "flag")   return <FlagScreen   key={`flag-${queueIndex}`}   player={player} roundNum={queueIndex + 1} total={total} onNext={handleFlagDone} />;
-  return <ResultsScreen score={cycleScore} total={grandTotal} onReplay={handleReplay} />;
+  return (
+    <>
+      <LanguageToggle />
+      {stage === "home" && <HomeScreen onStart={startGame} />}
+      {stage === "fields" && <FieldsScreen key={`fields-${queueIndex}`} player={player} roundNum={queueIndex + 1} total={total} onNext={handleFieldsDone} />}
+      {stage === "flag" && <FlagScreen key={`flag-${queueIndex}`} player={player} roundNum={queueIndex + 1} total={total} onNext={handleFlagDone} />}
+      {stage === "results" && <ResultsScreen score={cycleScore} total={grandTotal} onReplay={handleReplay} />}
+    </>
+  );
 }

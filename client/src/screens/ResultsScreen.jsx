@@ -1,7 +1,9 @@
 import { Button } from "../components/core/Button";
 import { ScoreBadge } from "../components/quiz/ScoreBadge";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export function ResultsScreen({ score, total, onReplay }) {
+  const { t } = useLanguage();
   const great = score / total >= 0.7;
   return (
     <div
@@ -20,14 +22,14 @@ export function ResultsScreen({ score, total, onReplay }) {
       }}
     >
       <div style={{ font: "var(--text-display-lg)", color: "var(--cream-050)" }}>
-        {great ? "FULL TIME 🏆" : "FULL TIME"}
+        {great ? t.fullTimeTrophy : t.fullTime}
       </div>
       <ScoreBadge score={score} total={total} size="lg" />
       <div style={{ font: "var(--text-body-md)", color: "var(--gray-300)", maxWidth: 260 }}>
-        {great ? "You scored like a true fan. Go again?" : "Next one's yours — run it back."}
+        {great ? t.greatResult : t.okResult}
       </div>
       <Button variant="gold" size="lg" onClick={onReplay} style={{ marginTop: 8 }}>
-        Play Again
+        {t.playAgain}
       </Button>
     </div>
   );

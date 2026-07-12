@@ -1,6 +1,8 @@
 import { Button } from "../components/core/Button";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export function HomeScreen({ onStart }) {
+  const { t } = useLanguage();
   return (
     <div
       style={{
@@ -18,14 +20,14 @@ export function HomeScreen({ onStart }) {
       }}
     >
       <div style={{ font: "700 20px/1 var(--font-body)", letterSpacing: "0.3em", color: "var(--gold-400)" }}>
-        ATLAS FC
+        {t.appName}
       </div>
-      <div style={{ font: "var(--text-display-xl)", color: "var(--cream-050)" }}>QUIZ</div>
+      <div style={{ font: "var(--text-display-xl)", color: "var(--cream-050)" }}>{t.appSubtitle}</div>
       <div style={{ font: "var(--text-body-md)", color: "var(--gray-300)", maxWidth: 280 }}>
-        Type each answer — nationality, club, full name, position — then color in the flag by hand.
+        {t.homeTagline}
       </div>
       <Button variant="gold" size="lg" onClick={onStart} style={{ marginTop: 12 }}>
-        ⚽ Kick Off
+        {t.kickOff}
       </Button>
     </div>
   );

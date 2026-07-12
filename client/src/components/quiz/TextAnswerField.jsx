@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function TextAnswerField({ label, value, onChange, disabled, state, correctAnswer, placeholder = "Type your answer…" }) {
+export function TextAnswerField({ label, value, onChange, disabled, state, correctAnswer, placeholder = "Type your answer…", correctAnswerLabel = "Correct answer" }) {
   const [focused, setFocused] = useState(false);
 
   let borderColor = "var(--color-border)";
@@ -48,7 +48,7 @@ export function TextAnswerField({ label, value, onChange, disabled, state, corre
       />
       {state === "wrong" && correctAnswer && (
         <div style={{ font: "var(--text-body-sm)", color: "var(--red-600)" }}>
-          Correct answer: {correctAnswer}
+          {correctAnswerLabel}: {correctAnswer}
         </div>
       )}
     </div>
