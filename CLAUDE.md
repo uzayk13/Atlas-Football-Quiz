@@ -46,10 +46,13 @@ client/                 React (Vite) frontend
     App.jsx             State machine + player queue logic
     screens/            HomeScreen, FieldsScreen, FlagScreen, ResultsScreen
     components/
-      core/             Button, Badge, Card, ProgressBar
+      core/             Button, Badge, Card, ProgressBar, LanguageToggle
       quiz/             PlayerCard, ScoreBadge, TextAnswerField,
                         FlagColorCanvas, FlagCrop
     data/players.js     FLAG_GEOMETRY (35 nationalities), buildPlayer(), shuffle()
+    i18n/
+      translations.js   EN/TR UI strings + NATIONALITY_TR (English→Turkish nationality map)
+      LanguageContext.jsx  LanguageProvider, useLanguage() — persists choice to localStorage
     styles/             CSS design tokens (colors, typography, spacing)
     utils/answer.js     normalizeAnswer(), isAnswerCorrect()
   public/
@@ -98,6 +101,14 @@ current_club, position (GK|DF|MF|FW), photo_url, updated_at
 3. Flag round: color the SVG flag by tapping palette swatches onto regions; drag emblems into place → check flag → show score
 4. Advance to next player in queue; when queue exhausted → Results screen → "Play Again" reshuffles
 
+## Localization
+
+The UI has an EN/TR language toggle (`LanguageToggle`, fixed top-right, rendered once in `App.jsx` so it's visible on every screen). `LanguageProvider` (`client/src/i18n/LanguageContext.jsx`) holds the current language in state, persisted to `localStorage` (`atlas-lang`), and exposes it via `useLanguage()` as `{ lang, toggleLang, t }` where `t` is the string dictionary for the active language (`client/src/i18n/translations.js`).
+
+Nationality answers are graded against **either** English (the DB value) **or** Turkish, using `NATIONALITY_TR` in `translations.js` — a hand-maintained map from each of the 34 DB nationality strings (e.g. `"France"`) to its Turkish name (`"Fransa"`). This check lives in `FieldsScreen.jsx` (`isFieldCorrect`), independent of which UI language is active. When adding a new player with a nationality not yet in the map, add the Turkish translation to `NATIONALITY_TR` too.
+
+`normalizeAnswer()` (`client/src/utils/answer.js`, mirrored in `server/routes/game.js`) folds Turkish dotless `ı` to `i` before stripping non-ASCII characters — `ı` has no diacritic decomposition, so without this it gets treated as a separator and breaks matching (e.g. "Mısır" vs "misir") for users typing on a non-Turkish keyboard.
+
 ## Flag geometry
 
 `client/src/data/players.js` exports `FLAG_GEOMETRY` — SVG region definitions for all 35 nationalities on a 300×200 canvas. `buildPlayer()` maps a DB row's `flag_colors[0]` code to the correct geometry.
@@ -111,6 +122,7 @@ Based on `Atlas FC Quiz Design System.zip` (in project root). Design tokens are 
 - `server/scripts/players.json` — 150 player names, source of truth for the pool
 - `server/services/sportsdb.js` — TheSportsDB API wrapper
 - `client/src/data/players.js` — FLAG_GEOMETRY + buildPlayer() + shuffle()
+- `client/src/i18n/translations.js` — EN/TR UI strings + NATIONALITY_TR
 - `client/src/App.jsx` — queue state machine
 - `client/src/screens/FlagScreen.jsx` — flag coloring round
 - `client/src/screens/FieldsScreen.jsx` — text answer round
